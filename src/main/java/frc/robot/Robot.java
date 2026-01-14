@@ -21,14 +21,12 @@ public class Robot extends TimedRobot {
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private static final int TALON_ID = 0;
-  private static final int FORWARD_PORT = 1;
-  private static final int BACKWARDS_PORT = 2;
+  private static final int FORWARD_PORT = 2;
   private static final double SPEED = 0.1;
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   private final TalonFX motor = new TalonFX(TALON_ID);
   private final DigitalInput forwardInput = new DigitalInput(FORWARD_PORT);
-  private final DigitalInput backwardInput = new DigitalInput(BACKWARDS_PORT);
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -92,8 +90,6 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     if (forwardInput.get()) {
       motor.set(SPEED);
-    } else if (backwardInput.get()) {
-      motor.set(-SPEED);
     } else {
       motor.set(0);
     }
