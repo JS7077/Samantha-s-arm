@@ -8,21 +8,21 @@ import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- * The methods in this class are called automatically corresponding to each mode, as described in
- * the TimedRobot documentation. If you change the name of this class or the package after creating
- * this project, you must also update the Main.java file in the project.
- */
 public class Robot extends TimedRobot {
+
+  //ATTENTION NON-PROG MEMBERS
+  /**This is the only thing that needs to be changed or tested. 
+   * It represents the decimal proportion of voltage we are giving to the motor, from 0.0 to 1.0*/
+  private static final double SPEED = 0.5;
+
+
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private static final int TALON_ID = 0;
   private static final int FORWARD_PORT = 2;
-  private static final double SPEED = 0.1;
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   private final TalonFX motor = new TalonFX(TALON_ID);
@@ -89,7 +89,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     if (forwardInput.get()) {
-      motor.set(SPEED);
+      motor.set(-Math.abs(SPEED));
     } else {
       motor.set(0);
     }
